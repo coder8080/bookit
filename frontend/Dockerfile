@@ -18,11 +18,10 @@ RUN pnpm run build
 FROM nginx:alpine
 
 COPY --from=build /app/dist /usr/share/nginx/html
-COPY --from=build /app/certs /usr/share/nginx/certs
 COPY --from=build /app/nginx /etc/nginx/conf.d
 
 RUN nginx -t
 
-EXPOSE $APP_PORT
+EXPOSE 1984
 
 CMD ["nginx", "-g", "daemon off;"]
