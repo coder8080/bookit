@@ -1,0 +1,9 @@
+FROM python:3.12
+
+COPY requirements requirements
+
+RUN pip install -r requirements/dev.txt
+
+COPY . .
+
+CMD sh -c "pytest --cov=src/api tests/"

@@ -1,0 +1,19 @@
+services:
+  app:
+    image: ${IMAGE_NAME}
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    volumes:
+      - .:/app
+      - ./nginx/templates:/etc/nginx/templates
+      - pnpm-store:/pnpm/store
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+
+volumes:
+  pnpm-store:
